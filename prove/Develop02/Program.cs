@@ -3,58 +3,6 @@ using System.Collections.Generic;
 
 class Program
 {
-    static void Main(string[] args)
-    {
-        Console.WriteLine("Welcome to the Journal Program!");
-
-        while (true)
-        {
-            Console.WriteLine("Please select one of the following choices:");
-            Console.WriteLine("1. Write\n2. Display\n3. Load\n4. Save\n5. Quit");
-            Console.Write("What would you like to do? ");
-            string userChoice = Console.ReadLine();
-
-            switch (userChoice)
-            {
-                case "1":
-                    Write();
-                    break;
-                case "2":
-                    Display();
-                    break;
-                case "3":
-                    Console.WriteLine("You chose to Load. Add your load logic here.");
-                    break;
-                case "4":
-                    Console.WriteLine("You chose to Save. Add your save logic here.");
-                    break;
-                case "5":
-                    Console.WriteLine("Quitting the program. Goodbye!");
-                    return;
-                default:
-                    Console.WriteLine("Invalid choice. Please select a valid option.");
-                    break;
-            }
-        }
-    }
-
-    public static void Write()
-    {
-        Prompts prompts = new Prompts();
-        string randomPrompt = prompts.RandomPrompt();
-        Console.WriteLine(randomPrompt);
-
-        Console.Write("> ");
-        string userEntry = Console.ReadLine();
-        // Save the userEntry and randomPrompt as needed
-    }
-
-    public static void Display()
-    {
-        Entry entry = new Entry();
-        entry.Display();
-    }
-
     public class Prompts
     {
         private List<string> _prompts = new List<string>
@@ -82,8 +30,53 @@ class Program
 
         public void Display()
         {
-            Console.WriteLine("Displaying entry...");
-            // Implement logic to display entries based on _date, _prompt, and _entryText
+            Console.WriteLine($"Date: {_date}\nPrompt: {_prompt}\nEntry Text: {_entryText}");
         }
     }
-}
+
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Welcome to the Journal Program!");
+
+        while (true)
+        {
+            Console.WriteLine("Please select one of the following choices:");
+            Console.WriteLine("1. Write\n2. Display\n3. Load\n4. Save\n5. Quit");
+            Console.Write("What would you like to do? ");
+            string userChoice = Console.ReadLine();
+
+            switch (userChoice)
+            {
+                case "1":
+                    Write();
+                    break;
+                case "2":
+  //                  DisplayEntry();
+                    break;
+                case "3":
+                    Console.WriteLine("You chose to Load. Add your load logic here.");
+                    break;
+                case "4":
+                    Console.WriteLine("You chose to Save. Add your save logic here.");
+                    break;
+                case "5":
+                    Console.WriteLine("Quitting the program. Goodbye!");
+                    return;
+                default:
+                    Console.WriteLine("Invalid choice. Please select a valid option.");
+                    break;
+            }
+        }
+    }
+
+    public static void Write()
+    {
+        Prompts prompts = new Prompts();
+        string randomPrompt = prompts.RandomPrompt();
+        Console.WriteLine(randomPrompt);
+
+        Console.Write("> ");
+        string userEntry = Console.ReadLine();
+    }
+
+  }
