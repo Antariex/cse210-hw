@@ -15,7 +15,6 @@ public class Journal
         string randomPrompt = prompts.RandomPrompt();
         Console.WriteLine(randomPrompt);
 
-        Console.Write("> ");
         string userEntry = Console.ReadLine();
         newEntry._entryText = userEntry;
         _entries.Add(newEntry);
