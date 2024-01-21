@@ -25,7 +25,7 @@ class Program
                 case "1":
                     Entry newEntry = new Entry();
                     journal.AddEntry(newEntry);
-                    
+
 
                     break;
                 case "2":
@@ -35,7 +35,10 @@ class Program
                     Console.WriteLine("You chose to Load. Add your load logic here.");
                     break;
                 case "4":
-                    Console.WriteLine("You chose to Save. Add your save logic here.");
+                    Console.Write("Enter the file name to save to: ");
+                    string saveFileName = Console.ReadLine();
+                    string fullFilePath = Path.Combine(Directory.GetCurrentDirectory(), saveFileName);
+                    journal.SaveToFile(fullFilePath);
                     break;
                 case "5":
                     Console.WriteLine("Quitting the program. Goodbye!");

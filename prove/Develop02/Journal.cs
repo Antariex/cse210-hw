@@ -1,4 +1,4 @@
-using System;
+using System.IO;
 public class Journal
 {
     public List<Entry> _entries = new List<Entry>();
@@ -28,7 +28,15 @@ public class Journal
 
     public void SaveToFile(string file)
     {
+        using (StreamWriter writer = new StreamWriter(file))
+        {
+            foreach (var entry in _entries)
+            {
+                writer.WriteLine(entry._entryText);
+            }
+        }
 
+        Console.WriteLine("Entries saved to file: " + file);
     }
 
     public void LoadFromFile(string file)
