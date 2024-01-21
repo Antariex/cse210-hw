@@ -3,8 +3,14 @@ public class Journal
 {
     public List<Entry> _entries = new List<Entry>();
 
-    public void AddEntry(Entry newEntry)
+    public void AddEntry(string date, string prompt)
     {
+        Entry newEntry = new Entry
+        {
+            _date = date,
+            _prompt = prompt
+        };
+
         Prompts prompts = new Prompts();
         string randomPrompt = prompts.RandomPrompt();
         Console.WriteLine(randomPrompt);
@@ -18,10 +24,11 @@ public class Journal
 
     public void DisplayAll()
     {
-        Console.WriteLine("All Entries:");
+        Console.WriteLine("All Entries:\n");
         foreach (var entry in _entries)
         {
-            Console.WriteLine(entry._entryText);
+            entry.Display();
+            Console.WriteLine();
         }
 
     }
@@ -32,7 +39,7 @@ public class Journal
         {
             foreach (var entry in _entries)
             {
-                writer.WriteLine(entry._entryText);
+                writer.WriteLine($"Date: {entry._date}\nPrompt: {entry._prompt}\nEntry Text: {entry._entryText}");
             }
         }
 
@@ -41,15 +48,38 @@ public class Journal
 
     public void LoadFromFile(string file)
     {
-        string[] lines = File.ReadAllLines(file);
+        string[] lines = System.IO.File.ReadAllLines(file);
 
-        foreach (string line in lines)
+        for (int i = 0; i < lines.Length; i += 3) // Assuming every entry is composed of 3 lines
         {
-            // Assuming each line represents an entry text
-            Entry newEntry = new Entry { _entryText = line };
-            _entries.Add(newEntry);
+            if (i + 2 < lines.Length)
+            {
+                string date = GetValueFromLine(lines[i]);
+                string prompt = GetValueFromLine(lines[i + 1]);
+                string entryText = GetValueFromLine(lines[i + 2]);
+
+                Entry loadedEntry = new Entry
+                {
+                    _date = date,
+                    _prompt = prompt,
+                    _entryText = entryText
+                };
+
+                _entries.Add(loadedEntry);
+            }
         }
 
         Console.WriteLine("Entries loaded from file: " + file);
     }
+
+    private string GetValueFromLine(string line)
+    {
+        string[] parts = line.Split(":");
+        if (parts.Length > 1)
+        {
+            return parts[1].Trim();
+        }
+        return string.Empty;
+    }
+
 }

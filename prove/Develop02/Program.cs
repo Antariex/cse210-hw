@@ -4,9 +4,6 @@ using System.Collections.Generic;
 class Program
 {
 
-
-
-
     static void Main(string[] args)
     {
         Console.WriteLine("Welcome to the Journal Program!");
@@ -23,19 +20,22 @@ class Program
             switch (userChoice)
             {
                 case "1":
-                    Entry newEntry = new Entry();
-                    journal.AddEntry(newEntry);
+                    DateTime theCurrentTime = DateTime.Now;
+                    string currentDate = theCurrentTime.ToShortDateString();
 
+                    Prompts prompts = new Prompts();
+                    string randomPrompt = prompts.RandomPrompt();
 
+                    journal.AddEntry(currentDate, randomPrompt); // <--- Añade randomPrompt aquí
                     break;
                 case "2":
                     journal.DisplayAll();
                     break;
                 case "3":
-                        Console.Write("Enter the file name to load from: ");
-    string loadFileName = Console.ReadLine();
-    string loadFilePath = Path.Combine(Directory.GetCurrentDirectory(), loadFileName);
-    journal.LoadFromFile(loadFilePath);
+                    Console.Write("Enter the file name to load from: ");
+                    string loadFileName = Console.ReadLine();
+                    string loadFilePath = Path.Combine(Directory.GetCurrentDirectory(), loadFileName);
+                    journal.LoadFromFile(loadFilePath);
                     break;
                 case "4":
                     Console.Write("Enter the file name to save to: ");
