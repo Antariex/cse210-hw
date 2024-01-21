@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 class Program
 {
-    
+
 
 
 
     static void Main(string[] args)
     {
         Console.WriteLine("Welcome to the Journal Program!");
+
+        Journal journal = new Journal();
 
         while (true)
         {
@@ -21,10 +23,13 @@ class Program
             switch (userChoice)
             {
                 case "1":
-                    Write();
+                    Entry newEntry = new Entry();
+                    journal.AddEntry(newEntry);
+                    
+
                     break;
                 case "2":
-  //                  DisplayEntry();
+                    journal.DisplayAll();
                     break;
                 case "3":
                     Console.WriteLine("You chose to Load. Add your load logic here.");
@@ -41,15 +46,4 @@ class Program
             }
         }
     }
-
-    public static void Write()
-    {
-        Prompts prompts = new Prompts();
-        string randomPrompt = prompts.RandomPrompt();
-        Console.WriteLine(randomPrompt);
-
-        Console.Write("> ");
-        string userEntry = Console.ReadLine();
-    }
-
-  }
+}
