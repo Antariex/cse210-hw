@@ -3,36 +3,9 @@ using System.Collections.Generic;
 
 class Program
 {
-    public class Prompts
-    {
-        private List<string> _prompts = new List<string>
-        {
-            "Who was the most interesting person I interacted with today?",
-            "What was the best part of my day?",
-            "How did I see the hand of the Lord in my life today?",
-            "What was the strongest emotion I felt today?",
-            "If I had one thing I could do over today, what would it be?"
-        };
+    
 
-        public string RandomPrompt()
-        {
-            Random random = new Random();
-            int randomIndex = random.Next(_prompts.Count);
-            return _prompts[randomIndex];
-        }
-    }
 
-    public class Entry
-    {
-        private string _date;
-        private string _prompt;
-        private string _entryText;
-
-        public void Display()
-        {
-            Console.WriteLine($"Date: {_date}\nPrompt: {_prompt}\nEntry Text: {_entryText}");
-        }
-    }
 
     static void Main(string[] args)
     {
