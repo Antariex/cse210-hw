@@ -32,7 +32,10 @@ class Program
                     journal.DisplayAll();
                     break;
                 case "3":
-                    Console.WriteLine("You chose to Load. Add your load logic here.");
+                        Console.Write("Enter the file name to load from: ");
+    string loadFileName = Console.ReadLine();
+    string loadFilePath = Path.Combine(Directory.GetCurrentDirectory(), loadFileName);
+    journal.LoadFromFile(loadFilePath);
                     break;
                 case "4":
                     Console.Write("Enter the file name to save to: ");

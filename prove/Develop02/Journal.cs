@@ -40,5 +40,16 @@ public class Journal
     }
 
     public void LoadFromFile(string file)
-    { }
+    {
+        string[] lines = File.ReadAllLines(file);
+
+        foreach (string line in lines)
+        {
+            // Assuming each line represents an entry text
+            Entry newEntry = new Entry { _entryText = line };
+            _entries.Add(newEntry);
+        }
+
+        Console.WriteLine("Entries loaded from file: " + file);
+    }
 }
