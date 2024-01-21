@@ -26,7 +26,7 @@ class Program
                     Prompts prompts = new Prompts();
                     string randomPrompt = prompts.RandomPrompt();
 
-                    journal.AddEntry(currentDate, randomPrompt); // <--- Añade randomPrompt aquí
+                    journal.AddEntry(currentDate, randomPrompt);
                     break;
                 case "2":
                     journal.DisplayAll();

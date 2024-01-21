@@ -49,7 +49,7 @@ public class Journal
     {
         string[] lines = System.IO.File.ReadAllLines(file);
 
-        for (int i = 0; i < lines.Length; i += 3) // Assuming every entry is composed of 3 lines
+        for (int i = 0; i < lines.Length; i += 3)
         {
             if (i + 2 < lines.Length)
             {
