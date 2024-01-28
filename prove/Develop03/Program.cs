@@ -1,25 +1,63 @@
-using System;
+using System.IO;
+using System.Collections.Generic;
 
-class Program
+public class Program
 {
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
+        bool programStatus = true;
         string userChoice;
 
-        if (userChoice == " ")
+        List<Scripture> scriptures = new List<Scripture>
         {
-            while (true)
+            new Scripture("Be thou ahumble; and the Lord thy God shall blead thee by the hand, and give thee answer to thy prayers.\n", new Reference("Doctrine & Convenants", 112, 10)),
+            new Scripture("And behold, I tell you these things that ye may learn wisdom; that ye may learn that when ye are in the service of your fellow beings ye are only in the service of your God.\n", new Reference("Mosiah", 2, 17)),
+            new Scripture("For behold, this is my work and my glory—to bring to pass the immortality and eternal life of man.\n", new Reference("Moses", 1, 39)),
+            new Scripture("Jesus answered, Verily, verily, I say unto thee, Except a man be born of water and of the Spirit, he cannot enter into the kingdom of God.\n", new Reference("John", 3, 5)),
+            new Scripture("Surely the Lord God will do nothing, but he revealeth his secret unto his servants the prophets.\n", new Reference("Amos", 3, 7))
+        };
+
+        Scripture currentScripture = scriptures[0];
+
+        currentScripture.Display();
+
+        while (programStatus)
+        {
+            Console.WriteLine("\nPress Enter to continue, type 'next' to try with another scripture, or type 'quit' to finish: ");
+            userChoice = Console.ReadLine().Trim();
+
+
+            switch (userChoice.ToLower())
             {
-                Console.WriteLine("In the demo video, you can see that when the user pressed the enter key, words on the screen or were replaced by underscores. In reality, what happened is the console was cleared...");
-                Console.WriteLine("Press Enter to continue or type 'quit' to finish: ");
-                string userChoie = Console.ReadLine();
+                case "quit":
+                    Console.WriteLine("Shutting down program, goodbye");
+                    programStatus = false;
+                    break;
+
+                case "next":
+                    int currentIndex = scriptures.IndexOf(currentScripture);
+                    int nextIndex = (currentIndex + 1) % scriptures.Count;
+                    currentScripture = scriptures[nextIndex];
+                    break;
+
+                case "":
+                    currentScripture.HideWords();
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
             }
 
+            if (programStatus)
+            {
+                currentScripture.Display();
+
+                if (currentScripture.AreWordsHidden())
+                {
+                    Console.WriteLine("\n*** All words are hidden now. ***");
+                }
+            }
         }
-    
-            else if (userChoice = "quit") { 
-    
-        Console.WriteLine("Finishing the program. Goodbye");
-                  
     }
-}}
+}
